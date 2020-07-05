@@ -15,8 +15,4 @@ public class Specialty {
         this.specialty = specialty;
     }
 
-    @Override
-    public String toString() {
-        return "specialty=" + specialty;
-    }
 }
