@@ -1,9 +1,9 @@
-package com.sysoiev.console_app;
+package com.sysoiev.consoleapp;
 
-import com.sysoiev.console_app.model.Account;
-import com.sysoiev.console_app.model.AccountStatus;
-import com.sysoiev.console_app.model.Customer;
-import com.sysoiev.console_app.model.Specialty;
+import com.sysoiev.consoleapp.model.Account;
+import com.sysoiev.consoleapp.model.AccountStatus;
+import com.sysoiev.consoleapp.model.Customer;
+import com.sysoiev.consoleapp.model.Specialty;
 
 public class App {
     public static void main(String[] args) {

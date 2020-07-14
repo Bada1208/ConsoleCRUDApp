@@ -1,21 +1,29 @@
-package com.sysoiev.console_app.model;
+package com.sysoiev.consoleapp.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Customer {
-    private Set<Specialty> specialties = new HashSet<>();
 
+    private long id;
     private String name;
     private String surname;
     private Account account;
+    private Set<Specialty> specialties;
 
-
-    public Customer(String name, String surname, Specialty specialty, Account account) {
+    public Customer(long id, String name, String surname, Set<Specialty> specialties, Account account) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
-        specialties.add(specialty);
+        this.specialties = specialties;
         this.account = account;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Set<Specialty> getSpecialties() {
@@ -50,4 +58,8 @@ public class Customer {
         this.account = account;
     }
 
+    @Override
+    public String toString() {
+        return id + " " + name + " " + surname + " " + account + " " + specialties;
+    }
 }
