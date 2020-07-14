@@ -17,7 +17,7 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
     private String filePath = "C:\\Users\\Admin\\IdeaProjects\\ConsoleCRUDApp\\src\\main\\resources\\customers.txt";
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private List<Customer> customerList = new ArrayList<>();
-    private Set<Specialty>specialties=new HashSet<>();
+    private Set<Specialty> specialties = new HashSet<>();
 
     @Override
     public Customer getById(Long id) {
@@ -53,10 +53,10 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
         item.setSurname(newSurname);
         System.out.println("Enter new specialty in order to update a row, please ");
         String newSpecialty = reader.readLine();
-        item.setSpecialties(specialties.add(newSpecialty));
+        item.setSpecialties(new Specialty(newSpecialty));
         System.out.println("Choose account status : active, banned or delete");
         String newStatus = reader.readLine();
-        if(newStatus.equals("active")) {
+        if (newStatus.equals("active")) {
         }
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             for (Customer c : customerList) {
@@ -68,7 +68,6 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
         return item;
     }
 
-}
 
     @Override
     public Customer save(Customer item) {

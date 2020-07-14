@@ -9,6 +9,7 @@ public class Customer {
     private String surname;
     private Account account;
     private Set<Specialty> specialties;
+    private Specialty specialty;
 
     public Customer(long id, String name, String surname, Set<Specialty> specialties, Account account) {
         this.id = id;
@@ -30,8 +31,8 @@ public class Customer {
         return specialties;
     }
 
-    public void setSpecialties(Set<Specialty> specialties) {
-        this.specialties = specialties;
+    public void setSpecialties(Specialty specialty) {
+        specialties.add(specialty);
     }
 
     public String getName() {
