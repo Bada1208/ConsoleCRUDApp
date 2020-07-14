@@ -30,9 +30,11 @@ public class SpecialtyView {
 
     public void saveSpecialty() {
         scanner = new Scanner(System.in);
+        System.out.println("Enter new id : ");
+        Long id =Long.parseLong(scanner.next());
         System.out.println("Enter new Specialty : ");
         String specialty = scanner.next();
-        Specialty newSpecialty = new Specialty(specialty);
+        Specialty newSpecialty = new Specialty(id,specialty);
         specialtyController.saveSpecialty(newSpecialty);
     }
     public void updateSpecialty() {
