@@ -25,7 +25,7 @@ public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
     }
 
     @Override
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         specialtyList.removeIf(s -> s.getId() == id);
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             for (Specialty s : specialtyList) {
