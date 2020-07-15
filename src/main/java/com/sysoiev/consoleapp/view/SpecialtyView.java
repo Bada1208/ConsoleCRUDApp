@@ -3,10 +3,11 @@ package com.sysoiev.consoleapp.view;
 import com.sysoiev.consoleapp.controller.SpecialtyController;
 import com.sysoiev.consoleapp.model.Specialty;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class SpecialtyView {
-    private Scanner scanner;
+    private Scanner scanner = new Scanner(System.in);
     private SpecialtyController specialtyController = new SpecialtyController();
 
     public void printSpecialties() {
@@ -15,33 +16,40 @@ public class SpecialtyView {
     }
 
     public void deleteSpecialty() {
-        scanner = new Scanner(System.in);
         System.out.println("Enter id in order to delete row : ");
         long index = Long.parseLong(scanner.next());
         specialtyController.deleteSpecialty(index);
     }
 
     public void getByIdSpecialty() {
-        scanner = new Scanner(System.in);
         System.out.println("Enter id in order to get specialty :");
         long id = Long.parseLong(scanner.next());
-        System.out.println(specialtyController.getValueByIndex(id).toString());
+        try {
+            System.out.println(specialtyController.getValueByIndex(id).toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveSpecialty() {
-        scanner = new Scanner(System.in);
-        System.out.println("Enter new id : ");
-        Long id =Long.parseLong(scanner.next());
-        System.out.println("Enter new Specialty : ");
+        System.out.println("Enter id : ");
+        Long id = Long.parseLong(scanner.next());
+        System.out.println("Enter specialty : ");
         String specialty = scanner.next();
-        Specialty newSpecialty = new Specialty(id,specialty);
+        Specialty newSpecialty = new Specialty(id, specialty);
         specialtyController.saveSpecialty(newSpecialty);
     }
-    public void updateSpecialty() {
 
+    public void updateSpecialty() {
+        System.out.println("Enter id in order to find element :");
+        Long id = Long.parseLong(scanner.next());
+        System.out.println("Enter new specialty : ");
+        String specialty = scanner.next();
+        Specialty newSpecialty = new Specialty(id, specialty);
+        specialtyController.updateSpecialty(newSpecialty);
     }
+
     public void run() {
-        scanner = new Scanner(System.in);
         boolean go = true;
         while (go) {
             System.out.println("\nChoose option, please :");

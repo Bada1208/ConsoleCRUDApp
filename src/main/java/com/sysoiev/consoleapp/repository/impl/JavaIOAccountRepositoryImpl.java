@@ -37,21 +37,21 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account update(Account item) throws IOException {
-        System.out.println("Enter new id in order to update a row, please ");
-        Long newId = Long.parseLong(reader.readLine());
-
-        if(newId==1) return new Account(1,AccountStatus.ACTIVE);
-        else if(newId==2) return new Account(2,AccountStatus.BANNED);
-        else if(newId==3) return new Account(3,AccountStatus.DELETED);
-        item.setId(newId);
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
-            for (Account a : accountList) {
-                fileWriter.write(a + "\n");
-            }
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+    public Account update(Account item){
+//        System.out.println("Enter new id in order to update a row, please ");
+//        Long newId = Long.parseLong(reader.readLine());
+//
+//        if(newId==1) return new Account(1,AccountStatus.ACTIVE);
+//        else if(newId==2) return new Account(2,AccountStatus.BANNED);
+//        else if(newId==3) return new Account(3,AccountStatus.DELETED);
+//        item.setId(newId);
+//        try (FileWriter fileWriter = new FileWriter(filePath)) {
+//            for (Account a : accountList) {
+//                fileWriter.write(a + "\n");
+//            }
+//        } catch (IOException e) {
+//            System.out.println(e);
+//        }
         return item;
     }
 
@@ -70,7 +70,7 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<Account> getAll() {
-        return accountList;
+    public List<String> getAll() {
+        return null;
     }
 }

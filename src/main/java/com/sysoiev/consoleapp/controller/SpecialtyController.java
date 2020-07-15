@@ -11,7 +11,7 @@ public class SpecialtyController {
     private SpecialtiesRepository specialtyRepository = new JavaIOSpecialtyRepositoryImpl();
 
 
-    public List<Specialty> printAll() {
+    public List<String> printAll() {
         return specialtyRepository.getAll();
     }
 
@@ -24,14 +24,11 @@ public class SpecialtyController {
     }
 
     public void updateSpecialty(Specialty updateSpecialty) {
-        try {
-            specialtyRepository.update(updateSpecialty);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        specialtyRepository.update(updateSpecialty);
+
     }
 
-    public Specialty getValueByIndex(long index) {
+    public Specialty getValueByIndex(long index) throws IOException {
         return specialtyRepository.getById(index);
     }
 

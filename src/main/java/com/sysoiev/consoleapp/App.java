@@ -1,10 +1,9 @@
 package com.sysoiev.consoleapp;
 
-import com.sysoiev.consoleapp.view.SpecialtyView;
+import com.sysoiev.consoleapp.view.CommonView;
 
 public class App {
     public static void main(String[] args) {
-        SpecialtyView specialtyView = new SpecialtyView();
-        specialtyView.run();
+        new CommonView().runApp();
     }
 }

@@ -41,8 +41,8 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public Customer update(Customer item) throws IOException {
-        System.out.println("Enter new id in order to update a row, please ");
+    public Customer update(Customer item){
+        /*System.out.println("Enter new id in order to update a row, please ");
         Long newId = Long.parseLong(reader.readLine());
         item.setId(newId);
         System.out.println("Enter new name in order to update a row, please ");
@@ -64,7 +64,7 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
             }
         } catch (IOException e) {
             System.out.println(e);
-        }
+        }*/
         return item;
     }
 
@@ -84,7 +84,7 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public List<Customer> getAll() {
-        return customerList;
+    public List<String> getAll() {
+        return null;
     }
 }

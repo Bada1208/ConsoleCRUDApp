@@ -7,12 +7,12 @@ public interface GenericRepository<T, ID> {
 
     T getById(ID id);
 
-    void deleteById(ID id);
+    void deleteById(ID id) ;
 
-    T update(T item) throws IOException;
+    T update(T item) ;
 
     T save(T item);
 
-    List<T> getAll();
+    List<String> getAll();
 
 }
