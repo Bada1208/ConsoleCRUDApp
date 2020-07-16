@@ -1,10 +1,12 @@
 package com.sysoiev.consoleapp.model;
 
 public class Account {
+    private static long counter = 0;
     private long id;
     private AccountStatus accountStatus;
 
     public Account(AccountStatus accountStatus) {
+        this.id = counter++;
         this.accountStatus = accountStatus;
     }
 

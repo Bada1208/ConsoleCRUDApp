@@ -19,6 +19,13 @@ public class Customer {
         this.account = account;
     }
 
+    public Customer(String name, String surname, Set<Specialty> specialties, Account account) {
+        this.name = name;
+        this.surname = surname;
+        this.specialties = specialties;
+        this.account = account;
+    }
+
     public long getId() {
         return id;
     }

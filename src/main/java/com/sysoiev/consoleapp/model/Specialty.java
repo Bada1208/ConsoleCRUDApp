@@ -1,10 +1,12 @@
 package com.sysoiev.consoleapp.model;
 
 public class Specialty {
+    private static long counter = 0;
     private long id;
     private String specialty;
 
     public Specialty(String specialty) {
+        this.id = counter++;
         this.specialty = specialty;
     }
 
