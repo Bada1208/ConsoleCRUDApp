@@ -3,6 +3,7 @@ package com.sysoiev.consoleapp.view;
 import java.util.Scanner;
 
 public class CommonView {
+
     SpecialtyView specialtyView = new SpecialtyView();
     AccountView accountView = new AccountView();
     CustomerView customerView = new CustomerView();
