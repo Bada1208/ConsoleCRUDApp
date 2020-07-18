@@ -6,7 +6,6 @@ public class Account {
     private AccountStatus accountStatus;
 
     public Account(AccountStatus accountStatus) {
-        this.id = counter++;
         this.accountStatus = accountStatus;
     }
 

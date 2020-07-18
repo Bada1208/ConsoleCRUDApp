@@ -4,7 +4,6 @@ import com.sysoiev.consoleapp.model.Account;
 import com.sysoiev.consoleapp.repository.AccountRepository;
 import com.sysoiev.consoleapp.repository.impl.JavaIOAccountRepositoryImpl;
 
-import java.io.IOException;
 import java.util.List;
 
 public class AccountController {
@@ -12,7 +11,7 @@ public class AccountController {
     private AccountRepository accountRepository = new JavaIOAccountRepositoryImpl();
 
 
-    public List<String> printAll() {
+    public List<Account> printAll() {
         return accountRepository.getAll();
     }
 
@@ -29,7 +28,7 @@ public class AccountController {
 
     }
 
-    public Account getValueByIndex(long index) throws IOException {
+    public Account getValueByIndex(long index) {
         return accountRepository.getById(index);
     }
 }

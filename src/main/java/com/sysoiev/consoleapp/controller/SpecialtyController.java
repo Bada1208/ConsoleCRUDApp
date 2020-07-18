@@ -11,7 +11,7 @@ public class SpecialtyController {
     private SpecialtiesRepository specialtyRepository = new JavaIOSpecialtyRepositoryImpl();
 
 
-    public List<String> printAll() {
+    public List<Specialty> printAll() {
         return specialtyRepository.getAll();
     }
 

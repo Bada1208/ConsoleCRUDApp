@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JavaIOAccountRepositoryImpl implements AccountRepository {
@@ -15,7 +16,6 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Account getById(Long id) {
-        String idStr = String.valueOf(id);
         List<String> fromFile = null;
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
@@ -23,8 +23,8 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
             e.printStackTrace();
         }
         for (String s : fromFile) {
-            if (s.startsWith(idStr)) {
-                return new Account(id, AccountStatus.valueOf(s.substring(s.indexOf(' '))));
+            if (s.substring(0,s.indexOf(" ")).equals(String.valueOf(id))) {
+                return new Account(id, AccountStatus.valueOf(s.substring(s.indexOf(' ') + 1)));
             }
         }
         return null;
@@ -38,7 +38,7 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        fromFile.removeIf(s -> s.startsWith(String.valueOf(id)));
+        fromFile.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             for (String s : fromFile) {
                 fileWriter.write(s + "\n");
@@ -77,13 +77,18 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<String> getAll() {
+    public List<Account> getAll() {
+        Account item = null;
+        List<Account> accountList = new ArrayList<>();
         List<String> fromFile = null;
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
+            for (String s : fromFile) {
+                accountList.add(new Account(Long.parseLong(s.substring(0, s.indexOf(" "))), AccountStatus.valueOf(s.substring(s.indexOf(" ")+1))));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return fromFile;
+        return accountList;
     }
 }

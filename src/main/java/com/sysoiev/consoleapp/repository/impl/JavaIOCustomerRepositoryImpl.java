@@ -1,6 +1,5 @@
 package com.sysoiev.consoleapp.repository.impl;
 
-import com.sysoiev.consoleapp.model.Account;
 import com.sysoiev.consoleapp.model.AccountStatus;
 import com.sysoiev.consoleapp.model.Customer;
 import com.sysoiev.consoleapp.model.Specialty;
@@ -10,10 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,22 +18,25 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public Customer getById(Long id) {
-
-        String idStr = String.valueOf(id);
         List<String> fromFile = null;
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        String line;
         for (String s : fromFile) {
-            if (s.startsWith(idStr)) {
+            line = s.substring(0, s.indexOf(" "));
+            if (line.equals(String.valueOf(id))) {
                 List<String> stringList = Stream
                         .of(s.split(" "))
-                        .map(elem -> new String(elem))
+                        .map(elem -> new String(elem.replaceAll("[\\[\\]]", "")))
                         .collect(Collectors.toList());
-                Set<Specialty> specialtySet = new HashSet<>(Arrays.asList(new Specialty(stringList.get(3))));
-                return new Customer(id, stringList.get(1), stringList.get(2), specialtySet, new Account(AccountStatus.valueOf(stringList.get(4))));
+                String name = stringList.get(1) + " ";
+                String surname = stringList.get(2) + " ";
+                Set<Specialty> specialtySet = new HashSet<>(Arrays.asList(new Specialty(stringList.get(3) + " ")));
+                AccountStatus accountStatus = AccountStatus.valueOf(stringList.get(4));
+                return new Customer(id, name, surname, specialtySet, accountStatus);
             }
 
         }
@@ -52,7 +51,7 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        fromFile.removeIf(s -> s.startsWith(String.valueOf(id)));
+        fromFile.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             for (String s : fromFile) {
                 fileWriter.write(s + "\n");
@@ -83,7 +82,7 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
     @Override
     public Customer save(Customer item) {
         try (FileWriter fileWriter = new FileWriter(filePath, true)) {
-            fileWriter.write(item.getId() + " " + item.getName() + item.getSurname() + item.getSpecialties() + item.getAccount() + "\n");
+            fileWriter.write(item.getId() + " " + item.getName() + " " + item.getSurname() + " " + item.getSpecialties() + " " + item.getAccountStatus() + "\n");
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -91,13 +90,28 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public List<String> getAll() {
+    public List<Customer> getAll() {
         List<String> fromFile = null;
+        List<Customer> customerList = new ArrayList<>();
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
+            for (String s : fromFile) {
+                List<String> stringList = Stream
+                        .of(s.split(" "))
+                        .map(elem -> new String(elem.replaceAll("[\\[\\]]", "")))
+                        .collect(Collectors.toList());
+
+                Long id = Long.parseLong(stringList.get(0));
+                String name = stringList.get(1) + " ";
+                String surname = stringList.get(2) + " ";
+                Set<Specialty> specialtySet = new HashSet<>(Arrays.asList(new Specialty(stringList.get(3) + " ")));
+                AccountStatus accountStatus = AccountStatus.valueOf(stringList.get(4));
+                customerList.add(new Customer(id, name, surname, specialtySet, accountStatus));
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return fromFile;
+        return customerList;
     }
 }

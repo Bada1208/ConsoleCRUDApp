@@ -1,6 +1,5 @@
 package com.sysoiev.consoleapp.controller;
 
-import com.sysoiev.consoleapp.model.Account;
 import com.sysoiev.consoleapp.model.Customer;
 import com.sysoiev.consoleapp.repository.CustomerRepository;
 import com.sysoiev.consoleapp.repository.impl.JavaIOCustomerRepositoryImpl;
@@ -11,7 +10,7 @@ import java.util.List;
 public class CustomerController {
     private CustomerRepository customerRepository = new JavaIOCustomerRepositoryImpl();
 
-    public List<String> printAll() {
+    public List<Customer> printAll() {
         return customerRepository.getAll();
     }
 

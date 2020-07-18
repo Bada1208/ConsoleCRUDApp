@@ -1,7 +1,6 @@
 package com.sysoiev.consoleapp.view;
 
 import com.sysoiev.consoleapp.controller.CustomerController;
-import com.sysoiev.consoleapp.model.Account;
 import com.sysoiev.consoleapp.model.AccountStatus;
 import com.sysoiev.consoleapp.model.Customer;
 import com.sysoiev.consoleapp.model.Specialty;
@@ -38,7 +37,7 @@ public class CustomerView {
         }
     }
 
-    // public Customer(long id, String name, String surname, Set<Specialty> specialties, Account account)
+
     public void saveCustomer() {
         System.out.println("Enter id : ");
         Long id = Long.parseLong(scanner.next());
@@ -48,19 +47,8 @@ public class CustomerView {
         String surname = scanner.next();
         System.out.println("Enter specialty :");
         String specialty = scanner.next();
-        System.out.println("Enter status : ACTIVE, DELETED or BANNED");
-        String accountStatusStr = scanner.next();
-        AccountStatus accountStatusVar = null;
-        switch (accountStatusStr) {
-            case "ACTIVE":
-                accountStatusVar = AccountStatus.ACTIVE;
-            case "DELETED":
-                accountStatusVar = AccountStatus.DELETED;
-            case "BANNED":
-                accountStatusVar = AccountStatus.BANNED;
-        }
         Set<Specialty> specialtySet = new HashSet<>(Arrays.asList(new Specialty(specialty)));
-        Customer newCustomer = new Customer(id, name, surname, specialtySet, new Account(accountStatusVar));
+        Customer newCustomer = new Customer(id, name, surname, specialtySet, AccountStatus.ACTIVE);
         customerController.saveCustomer(newCustomer);
     }
 
@@ -73,20 +61,23 @@ public class CustomerView {
         String surname = scanner.next();
         System.out.println("Enter specialty :");
         String specialty = scanner.next();
-        System.out.println("Enter status : ACTIVE, DELETED or BANNED");
+        System.out.println("Enter status : 1.ACTIVE, 2.DELETED or 3.BANNED");
         String accountStatusStr = scanner.next();
         AccountStatus accountStatusVar = null;
         switch (accountStatusStr) {
-            case "ACTIVE":
+            case "1":
                 accountStatusVar = AccountStatus.ACTIVE;
-            case "DELETED":
+                break;
+            case "2":
                 accountStatusVar = AccountStatus.DELETED;
-            case "BANNED":
+                break;
+            case "3":
                 accountStatusVar = AccountStatus.BANNED;
+                break;
         }
         Set<Specialty> specialtySet = new HashSet<>(Arrays.asList(new Specialty(specialty)));
-        Customer newCustomer = new Customer(name, surname, specialtySet, new Account(accountStatusVar));
-        customerController.saveCustomer(newCustomer);
+        Customer newCustomer = new Customer(id, name, surname, specialtySet, accountStatusVar);
+        customerController.updateCustomer(newCustomer);
     }
 
     public void run() {

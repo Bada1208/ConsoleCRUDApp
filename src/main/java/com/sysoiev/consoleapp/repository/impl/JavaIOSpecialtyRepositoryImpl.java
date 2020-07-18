@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
@@ -14,7 +15,6 @@ public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
 
     @Override
     public Specialty getById(Long id) {
-        String idStr = String.valueOf(id);
         List<String> fromFile = null;
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
@@ -22,7 +22,7 @@ public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
             e.printStackTrace();
         }
         for (String s : fromFile) {
-            if (s.startsWith(idStr)) {
+            if (s.substring(0,s.indexOf(" ")).equals(String.valueOf(id))) {
                 return new Specialty(id, s.substring(s.indexOf(' ')));
             }
         }
@@ -37,7 +37,7 @@ public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        fromFile.removeIf(s -> s.startsWith(String.valueOf(id)));
+        fromFile.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             for (String s : fromFile) {
                 fileWriter.write(s + "\n");
@@ -76,14 +76,18 @@ public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
     }
 
     @Override
-    public List<String> getAll() {
+    public List<Specialty> getAll() {
         List<String> fromFile = null;
+        List<Specialty> specialtyList = new ArrayList<>();
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
+            for (String s : fromFile) {
+                specialtyList.add(new Specialty(Long.parseLong(s.substring(0, s.indexOf(" "))), s.substring(s.indexOf(" "))));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return fromFile;
+        return specialtyList;
     }
 
 }

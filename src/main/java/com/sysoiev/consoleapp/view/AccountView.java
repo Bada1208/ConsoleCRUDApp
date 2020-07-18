@@ -26,11 +26,7 @@ public class AccountView {
     public void getByIdAccount() {
         System.out.println("Enter id in order to get account :");
         long id = Long.parseLong(scanner.next());
-        try {
-            System.out.println(accountController.getValueByIndex(id).toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println(accountController.getValueByIndex(id));
     }
 
     public void saveAccount() {
@@ -43,16 +39,19 @@ public class AccountView {
     public void updateAccount() {
         System.out.println("Enter id in order to find element :");
         Long id = Long.parseLong(scanner.next());
-        System.out.println("Enter new status : ACTIVE, DELETED or BANNED");
+        System.out.println("Enter status : 1.ACTIVE, 2.DELETED or 3.BANNED");
         String accountStatusStr = scanner.next();
         AccountStatus accountStatusVar = null;
         switch (accountStatusStr) {
-            case "ACTIVE":
+            case "1":
                 accountStatusVar = AccountStatus.ACTIVE;
-            case "DELETED":
+                break;
+            case "2":
                 accountStatusVar = AccountStatus.DELETED;
-            case "BANNED":
+                break;
+            case "3":
                 accountStatusVar = AccountStatus.BANNED;
+                break;
         }
         Account newAccount = new Account(id, accountStatusVar);
         accountController.updateAccount(newAccount);
