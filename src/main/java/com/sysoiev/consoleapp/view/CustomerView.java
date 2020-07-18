@@ -5,7 +5,6 @@ import com.sysoiev.consoleapp.model.AccountStatus;
 import com.sysoiev.consoleapp.model.Customer;
 import com.sysoiev.consoleapp.model.Specialty;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -30,11 +29,7 @@ public class CustomerView {
     public void getByIdCustomer() {
         System.out.println("Enter id in order to get customer :");
         long id = Long.parseLong(scanner.next());
-        try {
-            System.out.println(customerController.getValueByIndex(id).toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println(customerController.getValueByIndex(id).toString());
     }
 
 

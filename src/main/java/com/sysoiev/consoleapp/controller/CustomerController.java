@@ -4,7 +4,6 @@ import com.sysoiev.consoleapp.model.Customer;
 import com.sysoiev.consoleapp.repository.CustomerRepository;
 import com.sysoiev.consoleapp.repository.impl.JavaIOCustomerRepositoryImpl;
 
-import java.io.IOException;
 import java.util.List;
 
 public class CustomerController {
@@ -27,7 +26,7 @@ public class CustomerController {
 
     }
 
-    public Customer getValueByIndex(long index) throws IOException {
+    public Customer getValueByIndex(long index) {
         return customerRepository.getById(index);
     }
 }

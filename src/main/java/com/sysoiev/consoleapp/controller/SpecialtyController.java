@@ -4,7 +4,6 @@ import com.sysoiev.consoleapp.model.Specialty;
 import com.sysoiev.consoleapp.repository.SpecialtiesRepository;
 import com.sysoiev.consoleapp.repository.impl.JavaIOSpecialtyRepositoryImpl;
 
-import java.io.IOException;
 import java.util.List;
 
 public class SpecialtyController {
@@ -28,7 +27,7 @@ public class SpecialtyController {
 
     }
 
-    public Specialty getValueByIndex(long index) throws IOException {
+    public Specialty getValueByIndex(long index){
         return specialtyRepository.getById(index);
     }
 

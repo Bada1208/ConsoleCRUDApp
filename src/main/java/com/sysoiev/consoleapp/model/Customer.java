@@ -49,16 +49,8 @@ public class Customer {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public AccountStatus getAccountStatus() {
         return accountStatus;
-    }
-
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
     }
 
     public String getSpecialties() {

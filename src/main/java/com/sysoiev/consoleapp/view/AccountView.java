@@ -4,7 +4,6 @@ import com.sysoiev.consoleapp.controller.AccountController;
 import com.sysoiev.consoleapp.model.Account;
 import com.sysoiev.consoleapp.model.AccountStatus;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class AccountView {

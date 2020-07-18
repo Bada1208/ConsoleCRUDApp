@@ -3,7 +3,6 @@ package com.sysoiev.consoleapp.view;
 import com.sysoiev.consoleapp.controller.SpecialtyController;
 import com.sysoiev.consoleapp.model.Specialty;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class SpecialtyView {
@@ -24,11 +23,7 @@ public class SpecialtyView {
     public void getByIdSpecialty() {
         System.out.println("Enter id in order to get specialty :");
         long id = Long.parseLong(scanner.next());
-        try {
-            System.out.println(specialtyController.getValueByIndex(id).toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println(specialtyController.getValueByIndex(id).toString());
     }
 
     public void saveSpecialty() {
