@@ -43,7 +43,8 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
                             .collect(Collectors.toList());
                     Set<Specialty> specialtySet = new HashSet<>();
                     for (String str : stringList2) {
-                        specialtySet.add(new Specialty(str));
+                        Specialty specialty = specialtiesRepository.getById(Long.valueOf(str));
+                        specialtySet.add(specialty);
                     }
                     Account account = accountRepository.getById(Long.valueOf(stringList.get(4)));
                     return new Customer(id, name, surname, specialtySet, account);
@@ -94,7 +95,7 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
     public Customer save(Customer item) {
         try (FileWriter fileWriter = new FileWriter(filePath, true)) {
             fileWriter.write(item + "\n");
-        } catch (IOException e) {//item.getId() + "/ " + item.getName() + "/ " + item.getSurname() + "/ " + item.getSpecialties() + "/ " + item.getAccount().getId()
+        } catch (IOException e) {
             System.out.println(e);
         }
         return item;
@@ -122,7 +123,8 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
                         .collect(Collectors.toList());
                 Set<Specialty> specialtySet = new HashSet<>();
                 for (String str : stringList2) {
-                    specialtySet.add(new Specialty(str));
+                    Specialty specialty = specialtiesRepository.getById(Long.valueOf(str));
+                    specialtySet.add(specialty);
                 }
                 Account account = accountRepository.getById(Long.valueOf(stringList.get(4)));
                 customerList.add(new Customer(id, name, surname, specialtySet, account));

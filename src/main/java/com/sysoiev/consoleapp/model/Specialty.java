@@ -4,8 +4,8 @@ public class Specialty {
     private Long id;
     private String specialty;
 
-    public Specialty(String specialty) {
-        this.specialty = specialty;
+    public Specialty(Long id) {
+        this.id = id;
     }
 
     public Specialty(Long id, String specialty) {

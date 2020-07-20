@@ -56,7 +56,7 @@ public class Customer {
     public String getSpecialties() {
         String specialtyString = "";
         for (Specialty s : specialties) {
-            specialtyString += "{" + s.getSpecialty() + "}";
+            specialtyString += "{" + s.getId() + "}";
         }
         return specialtyString;
     }

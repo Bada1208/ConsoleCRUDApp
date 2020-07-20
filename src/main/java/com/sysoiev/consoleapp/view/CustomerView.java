@@ -39,19 +39,19 @@ public class CustomerView {
         String name = scanner.next();
         System.out.println("Enter surname :");
         String surname = scanner.next();
-        System.out.println("Enter specialty :");
+        System.out.println("Enter id of specialty :");
         Set<Specialty> specialtySet = new HashSet<>();
-        String specialty = scanner.next();
-        specialtySet.add(new Specialty(specialty));
+        Long idSpecialty = Long.parseLong(scanner.next());
+        specialtySet.add(new Specialty(idSpecialty));
         boolean go = true;
         while (go) {
-            System.out.println("Do You want to add new specialty? 1.Yes 2.No");
+            System.out.println("Do You want to add new id of specialty? 1.Yes 2.No");
             String yesOrNo = scanner.next();
             switch (yesOrNo) {
                 case ("1"):
-                    System.out.println("Enter new specialty :");
-                    String newSpecialty = scanner.next();
-                    specialtySet.add(new Specialty(newSpecialty));
+                    System.out.println("Enter id of new specialty :");
+                    Long newIdSpecialty = Long.parseLong(scanner.next());
+                    specialtySet.add(new Specialty(newIdSpecialty));
                     break;
                 case ("2"):
                     System.out.println("You choose do not add new specialty");
@@ -73,20 +73,20 @@ public class CustomerView {
         String name = scanner.next();
         System.out.println("Enter surname :");
         String surname = scanner.next();
-        System.out.println("Enter specialty :");
+        System.out.println("Enter id of specialty :");
         Set<Specialty> specialtySet = new HashSet<>();
-        String specialty = scanner.next();
-        specialtySet.add(new Specialty(specialty));
+        Long idSpecialty = Long.parseLong(scanner.next());
+        specialtySet.add(new Specialty(idSpecialty));
 
         boolean go = true;
         while (go) {
-            System.out.println("Do You want to add new specialty? 1.Yes 2.No");
+            System.out.println("Do You want to add new id of specialty? 1.Yes 2.No");
             String yesOrNo = scanner.next();
             switch (yesOrNo) {
                 case ("1"):
-                    System.out.println("Enter new specialty :");
-                    String newSpecialty = scanner.next();
-                    specialtySet.add(new Specialty(newSpecialty));
+                    System.out.println("Enter new id of specialty :");
+                    Long newIdSpecialty = Long.parseLong(scanner.next());
+                    specialtySet.add(new Specialty(newIdSpecialty));
                     break;
                 case ("2"):
                     System.out.println("You choose do not add new specialty");
