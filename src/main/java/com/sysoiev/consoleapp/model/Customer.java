@@ -3,7 +3,6 @@ package com.sysoiev.consoleapp.model;
 import java.util.Set;
 
 public class Customer {
-
     private Long id;
     private String name;
     private String surname;
