@@ -1,19 +1,19 @@
 package com.sysoiev.consoleapp.model;
 
 public class Specialty {
-    private long id;
+    private Long id;
     private String specialty;
 
     public Specialty(String specialty) {
         this.specialty = specialty;
     }
 
-    public Specialty(long id, String specialty) {
+    public Specialty(Long id, String specialty) {
         this.id = id;
         this.specialty = specialty;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

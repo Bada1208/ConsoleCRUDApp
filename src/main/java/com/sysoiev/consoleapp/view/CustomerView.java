@@ -1,11 +1,10 @@
 package com.sysoiev.consoleapp.view;
 
 import com.sysoiev.consoleapp.controller.CustomerController;
-import com.sysoiev.consoleapp.model.AccountStatus;
+import com.sysoiev.consoleapp.model.Account;
 import com.sysoiev.consoleapp.model.Customer;
 import com.sysoiev.consoleapp.model.Specialty;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -41,9 +40,29 @@ public class CustomerView {
         System.out.println("Enter surname :");
         String surname = scanner.next();
         System.out.println("Enter specialty :");
+        Set<Specialty> specialtySet = new HashSet<>();
         String specialty = scanner.next();
-        Set<Specialty> specialtySet = new HashSet<>(Arrays.asList(new Specialty(specialty)));
-        Customer newCustomer = new Customer(id, name, surname, specialtySet, AccountStatus.ACTIVE);
+        specialtySet.add(new Specialty(specialty));
+        boolean go = true;
+        while (go) {
+            System.out.println("Do You want to add new specialty? 1.Yes 2.No");
+            String yesOrNo = scanner.next();
+            switch (yesOrNo) {
+                case ("1"):
+                    System.out.println("Enter new specialty :");
+                    String newSpecialty = scanner.next();
+                    specialtySet.add(new Specialty(newSpecialty));
+                    break;
+                case ("2"):
+                    System.out.println("You choose do not add new specialty");
+                    go = false;
+                    break;
+            }
+        }
+        System.out.println("Enter id of account :");
+        Long idAccount = Long.parseLong(scanner.next());
+        Account account = new Account(idAccount);
+        Customer newCustomer = new Customer(id, name, surname, specialtySet, account);
         customerController.saveCustomer(newCustomer);
     }
 
@@ -55,23 +74,30 @@ public class CustomerView {
         System.out.println("Enter surname :");
         String surname = scanner.next();
         System.out.println("Enter specialty :");
+        Set<Specialty> specialtySet = new HashSet<>();
         String specialty = scanner.next();
-        System.out.println("Enter status : 1.ACTIVE, 2.DELETED or 3.BANNED");
-        String accountStatusStr = scanner.next();
-        AccountStatus accountStatusVar = null;
-        switch (accountStatusStr) {
-            case "1":
-                accountStatusVar = AccountStatus.ACTIVE;
-                break;
-            case "2":
-                accountStatusVar = AccountStatus.DELETED;
-                break;
-            case "3":
-                accountStatusVar = AccountStatus.BANNED;
-                break;
+        specialtySet.add(new Specialty(specialty));
+
+        boolean go = true;
+        while (go) {
+            System.out.println("Do You want to add new specialty? 1.Yes 2.No");
+            String yesOrNo = scanner.next();
+            switch (yesOrNo) {
+                case ("1"):
+                    System.out.println("Enter new specialty :");
+                    String newSpecialty = scanner.next();
+                    specialtySet.add(new Specialty(newSpecialty));
+                    break;
+                case ("2"):
+                    System.out.println("You choose do not add new specialty");
+                    go = false;
+                    break;
+            }
         }
-        Set<Specialty> specialtySet = new HashSet<>(Arrays.asList(new Specialty(specialty)));
-        Customer newCustomer = new Customer(id, name, surname, specialtySet, accountStatusVar);
+        System.out.println("Enter id of account :");
+        Long idAccount = Long.parseLong(scanner.next());
+        Account account = new Account(idAccount);
+        Customer newCustomer = new Customer(id, name, surname, specialtySet, account);
         customerController.updateCustomer(newCustomer);
     }
 

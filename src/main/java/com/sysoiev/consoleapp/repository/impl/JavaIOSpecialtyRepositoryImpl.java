@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
-    private String filePath = "src\\main\\resources\\specialties.txt";
+    private final String filePath = "src\\main\\resources\\specialties.txt";
 
     @Override
     public Specialty getById(Long id) {
@@ -22,7 +22,7 @@ public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
             e.printStackTrace();
         }
         for (String s : fromFile) {
-            if (s.substring(0,s.indexOf(" ")).equals(String.valueOf(id))) {
+            if (s.substring(0, s.indexOf(" ")).equals(String.valueOf(id))) {
                 return new Specialty(id, s.substring(s.indexOf(' ')));
             }
         }
@@ -34,15 +34,12 @@ public class JavaIOSpecialtyRepositoryImpl implements SpecialtiesRepository {
         List<String> fromFile = null;
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        fromFile.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
+            fromFile.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
+            FileWriter fileWriter = new FileWriter(filePath);
             for (String s : fromFile) {
                 fileWriter.write(s + "\n");
             }
-
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println(e);
         }

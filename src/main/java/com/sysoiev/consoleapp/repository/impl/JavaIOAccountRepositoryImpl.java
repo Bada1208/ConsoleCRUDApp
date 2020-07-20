@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JavaIOAccountRepositoryImpl implements AccountRepository {
-    private String filePath = "src\\main\\resources\\accounts.txt";
+    private final String filePath = "src\\main\\resources\\accounts.txt";
 
     @Override
     public Account getById(Long id) {
@@ -78,7 +78,6 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     @Override
     public List<Account> getAll() {
-        Account item = null;
         List<Account> accountList = new ArrayList<>();
         List<String> fromFile = null;
         try {

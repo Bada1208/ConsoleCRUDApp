@@ -23,7 +23,6 @@ public class CustomerController {
 
     public void updateCustomer(Customer updateCustomer) {
         customerRepository.update(updateCustomer);
-
     }
 
     public Customer getValueByIndex(long index) {

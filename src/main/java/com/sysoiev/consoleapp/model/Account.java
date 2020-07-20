@@ -1,20 +1,24 @@
 package com.sysoiev.consoleapp.model;
 
 public class Account {
-    private static long counter = 0;
-    private long id;
+
+    private Long id;
     private AccountStatus accountStatus;
+
+    public Account(Long id) {
+        this.id = id;
+    }
 
     public Account(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
     }
 
-    public Account(long id, AccountStatus accountStatus) {
+    public Account(Long id, AccountStatus accountStatus) {
         this.id = id;
         this.accountStatus = accountStatus;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -26,4 +30,5 @@ public class Account {
     public String toString() {
         return id + " " + accountStatus;
     }
+
 }

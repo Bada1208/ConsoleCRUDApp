@@ -4,32 +4,32 @@ import java.util.Set;
 
 public class Customer {
 
-    private long id;
+    private Long id;
     private String name;
     private String surname;
-    private AccountStatus accountStatus;
+    private Account account;
     private Set<Specialty> specialties;
 
-    public Customer(long id, String name, String surname, Set<Specialty> specialties, AccountStatus accountStatus) {
+    public Customer(Long id, String name, String surname, Set<Specialty> specialties, Account account) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.specialties = specialties;
-        this.accountStatus = accountStatus;
+        this.account = account;
     }
 
-    public Customer(String name, String surname, Set<Specialty> specialties, AccountStatus accountStatus) {
+    public Customer(String name, String surname, Set<Specialty> specialties, Account account) {
         this.name = name;
         this.surname = surname;
         this.specialties = specialties;
-        this.accountStatus = accountStatus;
+        this.account = account;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,20 +49,20 @@ public class Customer {
         return surname;
     }
 
-    public AccountStatus getAccountStatus() {
-        return accountStatus;
+    public Account getAccount() {
+        return account;
     }
 
     public String getSpecialties() {
-        String specialtyString = null;
+        String specialtyString = "";
         for (Specialty s : specialties) {
-            specialtyString = s.getSpecialty();
+            specialtyString += "{" + s.getSpecialty() + "}";
         }
         return specialtyString;
     }
 
     @Override
     public String toString() {
-        return id + " " + name + " " + surname + " " + getSpecialties() + " " + accountStatus;
+        return id + "/ " + name + "/ " + surname + "/ " + getSpecialties() + " /" + account.getId();
     }
 }

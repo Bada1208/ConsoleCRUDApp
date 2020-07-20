@@ -1,1 +1,3 @@
-222 rrr rrr rrr ACTIVE
+2/ name/ surename/ {cooder}{cooker} /4
+4/ name/ surename/ {cooder}{cooker} /5
+43/ new/ new/ {new}{new} /4
