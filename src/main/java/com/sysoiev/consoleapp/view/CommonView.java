@@ -4,12 +4,27 @@ import java.util.Scanner;
 
 public class CommonView {
 
-    SpecialtyView specialtyView = new SpecialtyView();
-    AccountView accountView = new AccountView();
-    CustomerView customerView = new CustomerView();
-    Scanner scanner = new Scanner(System.in);
+    private AccountView accountView;
+    private CustomerView customerView;
+    private SpecialtyView specialtyView;
+    private static CommonView view;
+
+    private CommonView() {
+        specialtyView = new SpecialtyView();
+        accountView = new AccountView();
+        customerView = new CustomerView();
+    }
+
+    public static CommonView getInstance() {
+        if (view == null) {
+            view = new CommonView();
+        }
+        return view;
+    }
+
 
     public void run() {
+        Scanner scanner = new Scanner(System.in);
         boolean go = true;
         while (go) {
             System.out.println("\nChoose file in order to do operations , please :");

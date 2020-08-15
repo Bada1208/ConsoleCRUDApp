@@ -1,4 +1,4 @@
-package com.sysoiev.consoleapp.repository.impl;
+package com.sysoiev.consoleapp.repository.txt;
 
 import com.sysoiev.consoleapp.model.Account;
 import com.sysoiev.consoleapp.model.Customer;
@@ -15,10 +15,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
-    private final String filePath = "src\\main\\resources\\customers.txt";
-    private SpecialtiesRepository specialtiesRepository = new JavaIOSpecialtyRepositoryImpl();
-    private AccountRepository accountRepository = new JavaIOAccountRepositoryImpl();
+public class JavaIOCustomerRepositoryTxt implements CustomerRepository {
+    private final String filePath = "src\\main\\resources\\txt\\customers.txt";
+    private SpecialtiesRepository specialtiesRepository = new JavaIOSpecialtyRepositoryTxt();
+    private AccountRepository accountRepository = new JavaIOAccountRepositoryTxt();
 
     @Override
     public Customer getById(Long id) {
@@ -47,7 +47,7 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
                         specialtySet.add(specialty);
                     }
                     Account account = accountRepository.getById(Long.valueOf(stringList.get(4)));
-                    return new Customer(id, name, surname, specialtySet, account);
+                    return new Customer.CustomerBuilder(name, surname, specialtySet, account).id(id).buildCustomer();
                 }
 
             }
@@ -127,7 +127,7 @@ public class JavaIOCustomerRepositoryImpl implements CustomerRepository {
                     specialtySet.add(specialty);
                 }
                 Account account = accountRepository.getById(Long.valueOf(stringList.get(4)));
-                customerList.add(new Customer(id, name, surname, specialtySet, account));
+                customerList.add(new Customer.CustomerBuilder(name, surname, specialtySet, account).id(id).buildCustomer());
             }
         } catch (IOException e) {
             e.printStackTrace();

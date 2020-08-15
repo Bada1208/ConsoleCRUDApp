@@ -2,12 +2,12 @@ package com.sysoiev.consoleapp.controller;
 
 import com.sysoiev.consoleapp.model.Customer;
 import com.sysoiev.consoleapp.repository.CustomerRepository;
-import com.sysoiev.consoleapp.repository.impl.JavaIOCustomerRepositoryImpl;
+import com.sysoiev.consoleapp.repository.txt.JavaIOCustomerRepositoryTxt;
 
 import java.util.List;
 
 public class CustomerController {
-    private CustomerRepository customerRepository = new JavaIOCustomerRepositoryImpl();
+    private CustomerRepository customerRepository = new JavaIOCustomerRepositoryTxt();
 
     public List<Customer> printAll() {
         return customerRepository.getAll();

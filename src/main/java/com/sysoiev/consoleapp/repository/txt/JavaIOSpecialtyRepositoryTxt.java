@@ -1,8 +1,7 @@
-package com.sysoiev.consoleapp.repository.impl;
+package com.sysoiev.consoleapp.repository.txt;
 
-import com.sysoiev.consoleapp.model.Account;
-import com.sysoiev.consoleapp.model.AccountStatus;
-import com.sysoiev.consoleapp.repository.AccountRepository;
+import com.sysoiev.consoleapp.model.Specialty;
+import com.sysoiev.consoleapp.repository.SpecialtiesRepository;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,11 +10,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JavaIOAccountRepositoryImpl implements AccountRepository {
-    private final String filePath = "src\\main\\resources\\accounts.txt";
+public class JavaIOSpecialtyRepositoryTxt implements SpecialtiesRepository {
+    private final String filePath = "src\\main\\resources\\txt\\specialties.txt";
 
     @Override
-    public Account getById(Long id) {
+    public Specialty getById(Long id) {
         List<String> fromFile = null;
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
@@ -23,8 +22,8 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
             e.printStackTrace();
         }
         for (String s : fromFile) {
-            if (s.substring(0,s.indexOf(" ")).equals(String.valueOf(id))) {
-                return new Account(id, AccountStatus.valueOf(s.substring(s.indexOf(' ') + 1)));
+            if (s.substring(0, s.indexOf(" ")).equals(String.valueOf(id))) {
+                return new Specialty(id, s.substring(s.indexOf(' ')));
             }
         }
         return null;
@@ -35,22 +34,19 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
         List<String> fromFile = null;
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        fromFile.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
+            fromFile.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
+            FileWriter fileWriter = new FileWriter(filePath);
             for (String s : fromFile) {
                 fileWriter.write(s + "\n");
             }
-
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
     @Override
-    public Account update(Account item) {
+    public Specialty update(Specialty item) {
         try {
             List<String> fromFile = Files.readAllLines(Paths.get(filePath));
             for (int i = 0; i < fromFile.size(); i++) {
@@ -67,9 +63,9 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account save(Account item) {
+    public Specialty save(Specialty item) {
         try (FileWriter fileWriter = new FileWriter(filePath, true)) {
-            fileWriter.write(item.getId() + " " + item.getAccountStatus() + "\n");
+            fileWriter.write(item.getId() + " " + item.getSpecialty() + "\n");
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -77,17 +73,18 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<Account> getAll() {
-        List<Account> accountList = new ArrayList<>();
+    public List<Specialty> getAll() {
         List<String> fromFile = null;
+        List<Specialty> specialtyList = new ArrayList<>();
         try {
             fromFile = Files.readAllLines(Paths.get(filePath));
             for (String s : fromFile) {
-                accountList.add(new Account(Long.parseLong(s.substring(0, s.indexOf(" "))), AccountStatus.valueOf(s.substring(s.indexOf(" ")+1))));
+                specialtyList.add(new Specialty(Long.parseLong(s.substring(0, s.indexOf(" "))), s.substring(s.indexOf(" "))));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return accountList;
+        return specialtyList;
     }
+
 }

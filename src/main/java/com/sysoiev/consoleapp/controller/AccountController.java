@@ -2,13 +2,13 @@ package com.sysoiev.consoleapp.controller;
 
 import com.sysoiev.consoleapp.model.Account;
 import com.sysoiev.consoleapp.repository.AccountRepository;
-import com.sysoiev.consoleapp.repository.impl.JavaIOAccountRepositoryImpl;
+import com.sysoiev.consoleapp.repository.txt.JavaIOAccountRepositoryTxt;
 
 import java.util.List;
 
 public class AccountController {
 
-    private AccountRepository accountRepository = new JavaIOAccountRepositoryImpl();
+    private AccountRepository accountRepository = new JavaIOAccountRepositoryTxt();
 
 
     public List<Account> printAll() {

@@ -4,7 +4,7 @@ import com.sysoiev.consoleapp.view.CommonView;
 
 public class App {
     public static void main(String[] args) {
-        new CommonView().run();
+        CommonView.getInstance().run();
     }
 
 }
