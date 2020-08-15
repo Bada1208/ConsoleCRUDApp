@@ -2,12 +2,12 @@ package com.sysoiev.consoleapp.controller;
 
 import com.sysoiev.consoleapp.model.Specialty;
 import com.sysoiev.consoleapp.repository.SpecialtiesRepository;
-import com.sysoiev.consoleapp.repository.txt.JavaIOSpecialtyRepositoryTxt;
+import com.sysoiev.consoleapp.repository.csv.JavaIOSpecialtyRepositoryCsv;
 
 import java.util.List;
 
 public class SpecialtyController {
-    private SpecialtiesRepository specialtyRepository = new JavaIOSpecialtyRepositoryTxt();
+    private SpecialtiesRepository specialtyRepository = new JavaIOSpecialtyRepositoryCsv();
 
 
     public List<Specialty> printAll() {
