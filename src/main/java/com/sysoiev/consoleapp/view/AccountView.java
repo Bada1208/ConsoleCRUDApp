@@ -18,14 +18,22 @@ public class AccountView {
 
     public void deleteAccount() {
         System.out.println("Enter id in order to delete row : ");
-        long index = Long.parseLong(scanner.next());
+        Long index = Long.parseLong(scanner.next());
         accountController.deleteAccount(index);
     }
 
     public void getByIdAccount() {
         System.out.println("Enter id in order to get account :");
-        long id = Long.parseLong(scanner.next());
-        System.out.println(accountController.getValueByIndex(id));
+        Long id = Long.parseLong(scanner.next());
+        try {
+            if (accountController.getValueByIndex(id) != null)
+                System.out.println(accountController.getValueByIndex(id).toString());
+
+        } catch (NullPointerException e) {
+            System.out.println("There is no such number ");
+            System.out.println("Try one more time, please");
+            getByIdAccount();
+        }
     }
 
     public void saveAccount() {

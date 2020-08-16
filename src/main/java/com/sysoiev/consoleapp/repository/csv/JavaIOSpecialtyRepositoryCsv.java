@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class JavaIOSpecialtyRepositoryCsv implements SpecialtiesRepository {
     private final String filePath = "src\\main\\resources\\csv\\specialties.csv";
@@ -27,7 +28,8 @@ public class JavaIOSpecialtyRepositoryCsv implements SpecialtiesRepository {
                 return new Specialty(id, s.substring(s.indexOf(' ')));
             }
         }
-        return null;
+        Optional<Specialty> empty =  Optional.empty();
+        return empty.orElseThrow(NullPointerException::new);
     }
 
     @Override

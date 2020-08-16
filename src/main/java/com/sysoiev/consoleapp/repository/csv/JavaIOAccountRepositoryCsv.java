@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class JavaIOAccountRepositoryCsv implements AccountRepository {
     private final String filePath = "src\\main\\resources\\csv\\accounts.csv";
@@ -27,7 +28,8 @@ public class JavaIOAccountRepositoryCsv implements AccountRepository {
                 return new Account(id, AccountStatus.valueOf(s.substring(s.indexOf(' ') + 1)));
             }
         }
-        return null;
+        Optional<Account> empty =  Optional.empty();
+        return empty.orElseThrow(NullPointerException::new);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class CustomerController {
         customerRepository.save(newCustomer);
     }
 
-    public void deleteCustomer(long index) {
+    public void deleteCustomer(Long index) {
         customerRepository.deleteById(index);
     }
 
@@ -25,7 +25,7 @@ public class CustomerController {
         customerRepository.update(updateCustomer);
     }
 
-    public Customer getValueByIndex(long index) {
+    public Customer getValueByIndex(Long index) {
         return customerRepository.getById(index);
     }
 }

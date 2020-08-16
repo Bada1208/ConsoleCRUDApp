@@ -19,7 +19,7 @@ public class AccountController {
         accountRepository.save(newAccount);
     }
 
-    public void deleteAccount(long index) {
+    public void deleteAccount(Long index) {
         accountRepository.deleteById(index);
     }
 
@@ -28,7 +28,7 @@ public class AccountController {
 
     }
 
-    public Account getValueByIndex(long index) {
+    public Account getValueByIndex(Long index) {
         return accountRepository.getById(index);
     }
 }

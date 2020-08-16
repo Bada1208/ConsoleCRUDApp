@@ -18,7 +18,7 @@ public class SpecialtyController {
         specialtyRepository.save(newSpecialty);
     }
 
-    public void deleteSpecialty(long index) {
+    public void deleteSpecialty(Long index) {
         specialtyRepository.deleteById(index);
     }
 
@@ -27,7 +27,7 @@ public class SpecialtyController {
 
     }
 
-    public Specialty getValueByIndex(long index){
+    public Specialty getValueByIndex(Long index){
         return specialtyRepository.getById(index);
     }
 
