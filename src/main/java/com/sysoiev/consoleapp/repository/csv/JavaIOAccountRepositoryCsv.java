@@ -14,35 +14,32 @@ import java.util.Optional;
 
 public class JavaIOAccountRepositoryCsv implements AccountRepository {
     private final String filePath = "src\\main\\resources\\csv\\accounts.csv";
+    private List<String> FROM_FILE_LIST;
 
-    @Override
-    public Account getById(Long id) {
-        List<String> fromFile = null;
+    {
         try {
-            fromFile = Files.readAllLines(Paths.get(filePath));
+            FROM_FILE_LIST = Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (String s : fromFile) {
-            if (s.substring(0,s.indexOf(" ")).equals(String.valueOf(id))) {
+    }
+
+    @Override
+    public Account getById(Long id) {
+        for (String s : FROM_FILE_LIST) {
+            if (s.substring(0, s.indexOf(" ")).equals(String.valueOf(id))) {
                 return new Account(id, AccountStatus.valueOf(s.substring(s.indexOf(' ') + 1)));
             }
         }
-        Optional<Account> empty =  Optional.empty();
+        Optional<Account> empty = Optional.empty();
         return empty.orElseThrow(NullPointerException::new);
     }
 
     @Override
     public void deleteById(Long id) {
-        List<String> fromFile = null;
-        try {
-            fromFile = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        fromFile.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
+        FROM_FILE_LIST.removeIf(s -> (s.substring(0, s.indexOf(" "))).equals(String.valueOf(id)));
         try (FileWriter fileWriter = new FileWriter(filePath)) {
-            for (String s : fromFile) {
+            for (String s : FROM_FILE_LIST) {
                 fileWriter.write(s + "\n");
             }
 
@@ -54,14 +51,13 @@ public class JavaIOAccountRepositoryCsv implements AccountRepository {
     @Override
     public Account update(Account item) {
         try {
-            List<String> fromFile = Files.readAllLines(Paths.get(filePath));
-            for (int i = 0; i < fromFile.size(); i++) {
-                String line = fromFile.get(i).substring(0, fromFile.get(i).indexOf(' '));
+            for (int i = 0; i < FROM_FILE_LIST.size(); i++) {
+                String line = FROM_FILE_LIST.get(i).substring(0, FROM_FILE_LIST.get(i).indexOf(' '));
                 if (line.equals(String.valueOf(item.getId()))) {
-                    fromFile.set(i, item.toString());
+                    FROM_FILE_LIST.set(i, item.toString());
                 }
             }
-            Files.write(Paths.get(filePath), fromFile);
+            Files.write(Paths.get(filePath), FROM_FILE_LIST);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,6 +68,7 @@ public class JavaIOAccountRepositoryCsv implements AccountRepository {
     public Account save(Account item) {
         try (FileWriter fileWriter = new FileWriter(filePath, true)) {
             fileWriter.write(item.getId() + " " + item.getAccountStatus() + "\n");
+            FROM_FILE_LIST.add(item.toString());
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -81,14 +78,11 @@ public class JavaIOAccountRepositoryCsv implements AccountRepository {
     @Override
     public List<Account> getAll() {
         List<Account> accountList = new ArrayList<>();
-        List<String> fromFile = null;
-        try {
-            fromFile = Files.readAllLines(Paths.get(filePath));
-            for (String s : fromFile) {
-                accountList.add(new Account(Long.parseLong(s.substring(0, s.indexOf(" "))), AccountStatus.valueOf(s.substring(s.indexOf(" ")+1))));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (String s : FROM_FILE_LIST) {
+            accountList.add(
+                    new Account(Long.parseLong(s.substring(0, s.indexOf(" "))),
+                    AccountStatus.valueOf(s.substring(s.indexOf(" ") + 1)))
+            );
         }
         return accountList;
     }
