@@ -114,8 +114,8 @@ public class JavaIOCustomerRepositoryCsv implements CustomerRepository {
                         .map(elem -> elem.replaceAll("[\\/\\/]", ""))
                         .collect(Collectors.toList());
                 Long id = Long.parseLong(stringList.get(0));
-                String name = stringList.get(1);// + " "
-                String surname = stringList.get(2);// + " "
+                String name = stringList.get(1);
+                String surname = stringList.get(2);
                 String lineSet = stringList.get(3);
                 String lineWithoutBrackets = lineSet.replaceAll("[{]", "");
                 String lineWithoutBrackets2 = lineWithoutBrackets.replaceAll("[}]", " ");
